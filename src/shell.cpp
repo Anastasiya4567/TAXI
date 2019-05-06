@@ -237,7 +237,7 @@ void Shell:: ShowAutos ()
 
 void Shell:: AddDriver ()
 {
-    string* surname= new string[MAX_LENGTH]; //проверка
+    string* surname= new string[MAX_LENGTH];
     if (surname==nullptr)
     {
         cout << "You don't have enough memory" << endl;

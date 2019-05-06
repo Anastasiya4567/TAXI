@@ -9,7 +9,7 @@ CFLAGS := -g -Wall -pedantic
 INC := -I include
 
 $(TARGET): $(OBJECTS)
-	@mkdir bin
+	@mkdir -p bin
 	$(CC) $^ -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
@@ -18,4 +18,5 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 clean:
 	$(RM) -r $(BUILDDIR) $(TARGET)
+
 .PHONY: clean
