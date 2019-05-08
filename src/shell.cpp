@@ -210,7 +210,7 @@ void Shell:: DeleteAuto (string name)
         bool del=false;
         for (vector<Autos<short int>>::iterator i=vCar.begin(); i!=vCar.end(); ++i)
         {
-            if ((*i).returnName()==name)
+            if (i->returnName()==name)
             {
                 vCar.erase(i);
                 cout << "The car with the name " << name << " was deleted" << endl;
@@ -228,8 +228,8 @@ void Shell:: ShowAutos ()
       {
         for (vector<Autos<short int>>::iterator i=vCar.begin(); i!=vCar.end(); ++i)
             {
-                cout << "name - " << (*i).returnName() << ",  colour - "
-                << (*i).returnColour () << ",  year - " << (*i).returnYear() << endl;
+                cout << "name - " << i->returnName() << ",  colour - "
+                << i->returnColour () << ",  year - " << i->returnYear() << endl;
             }
       }
       else cout << "The base of autos is empty" << endl;
@@ -297,8 +297,8 @@ void Shell:: ShowDrivers ()
     {
     for (vector<Drivers>::iterator i=vDriver.begin(); i!=vDriver.end(); ++i)
       {
-            cout << "surname - " << (*i).returnDSur() << ",  code - "
-            << (*i).returnCode() << ",  points of experience - " << (*i).returnExp() << endl;
+            cout << "surname - " << i->returnDSur() << ",  code - "
+            << i->returnCode() << ",  points of experience - " << i->returnExp() << endl;
       }
     }
     else cout << "The base of drivers is empty" << endl;
@@ -347,9 +347,9 @@ void Shell:: DisChange (string surname, double discount2)
         bool ch=false;
         for (vector<Clients>::iterator i=vClient.begin(); i!=vClient.end(); ++i)
         {
-            if ((*i).returnCSur()==surname)
+            if (i->returnCSur()==surname)
             {
-                (*i).returnDis(discount2);
+                i->returnDis(discount2);
                 ch=true;
                 cout << "The discount has been changed " << endl;
             }
@@ -364,8 +364,8 @@ void Shell:: ShowClients ()
       {
         for (vector<Clients>::iterator i=vClient.begin(); i!=vClient.end(); ++i)
             {
-                cout << "name - " << (*i).returnCName() << ",  surname - "
-                << (*i).returnCSur() << ",  discount - " << (*i).returnDis() << endl;
+                cout << "name - " << i->returnCName() << ",  surname - "
+                << i->returnCSur() << ",  discount - " << i->returnDis() << endl;
             }
         }
       else cout << "The base of clients is empty" << endl;
