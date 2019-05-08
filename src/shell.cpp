@@ -6,7 +6,6 @@ projekt2 - Korporacja taksowkarska
 #include <vector>
 #include <cstring>
 #include <iomanip>
-#include <algorithm>
 
 #include "shell.hpp"
 #include "autos.hpp"
