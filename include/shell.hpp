@@ -14,9 +14,9 @@ projekt2 - Korporacja taksowkarska
 class Shell
 {
     private:
-    std::vector <Autos<short int>> vCar;
-    std::vector <Drivers> vDriver;
-    std::vector <Clients> vClient;
+    std::vector <Auto<short int>> vCars;
+    std::vector <Driver> vDrivers;
+    std::vector <Client> vClients;
 
     public:
     Shell () {};

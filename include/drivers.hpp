@@ -5,7 +5,7 @@ projekt2 - Korporacja taksowkarska
 #ifndef DRIVERS_HPP_INCLUDED
 #define DRIVERS_HPP_INCLUDED
 
-class Drivers
+class Driver
 {
   private:
     std::string drivSur;
@@ -13,13 +13,11 @@ class Drivers
     unsigned short int exp; // points of experience
 
   public:
-    Drivers(std::string d, std::string c, short int e);
-    std::string returnDSur ();
-    std::string returnCode ();
-    short int returnExp ();
-    friend bool operator == (Drivers &driv1, std::string Code);
+    Driver (std::string c, std::string d=" ", short int e=0);
+    std::string getDSur ();
+    std::string getCode ();
+    short int getExp ();
+    friend bool operator == (const Driver &driv1, const std::string Code);
 };
-
-
 
 #endif // DRIVERS_HPP_INCLUDED
