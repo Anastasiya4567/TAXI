@@ -8,26 +8,26 @@ projekt2 - Korporacja taksowkarska
 
 using namespace std;
 
-Drivers::Drivers(string d, string c, short int e)
+Driver::Driver(string c, string d,  short int e)
 {
      this->drivSur=d;
      this->code=c;
      this->exp=e;
 }
-string Drivers::returnDSur ()
+string Driver::getDSur ()
 {
     return this->drivSur;
 }
-string Drivers:: returnCode ()
+string Driver:: getCode ()
 {
     return this->code;
 }
-short int Drivers:: returnExp ()
+short int Driver:: getExp ()
 {
     return this->exp;
 }
 
-bool operator == (Drivers &driv1, string Code)
+bool operator == (const Driver &driv1, const string Code)
 {
-    return (driv1.returnCode()==Code);
+    return (driv1.code==Code);
 }

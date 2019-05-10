@@ -6,6 +6,7 @@ projekt2 - Korporacja taksowkarska
 #include <vector>
 #include <cstring>
 #include <iomanip>
+#include <algorithm>
 
 #include "shell.hpp"
 #include "autos.hpp"
@@ -61,7 +62,7 @@ void Shell:: processing ()
 
         else if (!strcmp (command,"DeleteAuto"))
         {
-            if (!vCar.empty())
+            if (!vCars.empty())
             {
               string name;
                 cout << "Enter the name of the car: " << endl;
@@ -84,7 +85,7 @@ void Shell:: processing ()
 
         else if (!strcmp (command,"DeleteDriver"))
         {
-            if (!vDriver.empty())
+            if (!vDrivers.empty())
             {
                 string code;
                 cout << "Enter the code of the driver: " << endl;
@@ -107,7 +108,7 @@ void Shell:: processing ()
 
         else if (!strcmp (command,"DisChange"))
         {
-            if (!vClient.empty())
+            if (!vClients.empty())
             {
                 string surname;
                 cout << "Enter the surname of a client:" << endl;
@@ -200,35 +201,42 @@ void Shell:: AddAuto ()
        cin.ignore(100, '\n');
        cin >> year;
    }
-   vCar.push_back(Autos<short int>(name, colour, year));
+   vCars.push_back(Auto<short int>(name, colour, year));
    cin.ignore(100, '\n');
 }
 
 void Shell:: DeleteAuto (string name)
 {
-        bool del=false;
-        for (vector<Autos<short int>>::iterator i=vCar.begin(); i!=vCar.end(); ++i)
+        /*bool del=false;
+        for (vector<Auto<short int>>::iterator i=vCars.begin(); i!=vCars.end(); ++i)
         {
-            if (i->returnName()==name)
+            if (i->getName()==name)
             {
-                vCar.erase(i);
+                vCars.erase(i);
                 cout << "The car with the name " << name << " was deleted" << endl;
                 del=true;
                 break;
             }
         }
         if (!del)  cout << "No auto with this name is in a base. Check your input data" << endl;
+        cin.ignore(100, '\n');*/
+        unsigned int length=vCars.size();
+        vCars.erase(find(vCars.begin(), vCars.end(), name));
+        if (length==vCars.size())
+            cout << "No car with this name is in a base. Check your input data" << endl;
+        else
+            cout << "The car with the name " << name << " was deleted" << endl;
         cin.ignore(100, '\n');
 }
 
 void Shell:: ShowAutos ()
 {
-      if (!vCar.empty())
+      if (!vCars.empty())
       {
-        for (vector<Autos<short int>>::iterator i=vCar.begin(); i!=vCar.end(); ++i)
+        for (vector<Auto<short int>>::iterator i=vCars.begin(); i!=vCars.end(); ++i)
             {
-                cout << "name - " << i->returnName() << ",  colour - "
-                << i->returnColour () << ",  year - " << i->returnYear() << endl;
+                cout << "name - " << i->getName() << ",  colour - "
+                << i->getColour () << ",  year - " << i->getYear() << endl;
             }
       }
       else cout << "The base of autos is empty" << endl;
@@ -242,10 +250,8 @@ void Shell:: AddDriver ()
         cout << "You don't have enough memory" << endl;
         exit(1);
     }
-
     cout << "Enter the surname:" << endl;
     cin >> *surname;
-
 
     string code;
     cout << "Enter the code:" << endl;
@@ -268,36 +274,30 @@ void Shell:: AddDriver ()
        cin.ignore(100, '\n');
        cin >> exp;
     }
-   vDriver.push_back(Drivers (*surname, code, exp));
+   vDrivers.push_back(Driver (code, *surname, exp));
    delete [] surname;
    cin.ignore(100, '\n');
 }
 
 template <typename K> void Shell:: DeleteDriver (K code)
 {
-    bool del=false;
-    for (vector<Drivers>::iterator i=vDriver.begin(); i!=vDriver.end(); ++i)
-    {
-        if ((*i)==code)
-        {
-            vDriver.erase(i);
-            cout << "The driver with the code " << code << " was deleted" << endl;
-            del=true;
-            break;
-        }
-    }
-    if (!del)  cout << "No driver with this code is in a base. Check your input data" << endl;
+    unsigned int length=vDrivers.size();
+    vDrivers.erase(find(vDrivers.begin(), vDrivers.end(), code));
+    if (length==vDrivers.size())
+        cout << "No driver with this code is in a base. Check your input data" << endl;
+    else
+        cout << "The driver with the code " << code << " was deleted" << endl;
     cin.ignore(100, '\n');
 }
 
 void Shell:: ShowDrivers ()
 {
-    if (!vDriver.empty())
+    if (!vDrivers.empty())
     {
-    for (vector<Drivers>::iterator i=vDriver.begin(); i!=vDriver.end(); ++i)
+    for (vector<Driver>::iterator i=vDrivers.begin(); i!=vDrivers.end(); ++i)
       {
-            cout << "surname - " << i->returnDSur() << ",  code - "
-            << i->returnCode() << ",  points of experience - " << i->returnExp() << endl;
+            cout << "surname - " << i->getDSur() << ",  code - "
+            << i->getCode() << ",  points of experience - " << i->getExp() << endl;
       }
     }
     else cout << "The base of drivers is empty" << endl;
@@ -336,7 +336,7 @@ void Shell::AddClient()
        cin.ignore(100, '\n');
        cin >> *discount;
     }
-    vClient.push_back(Clients (surname, name, *discount));
+    vClients.push_back(Client (surname, name, *discount));
     delete discount;
     cin.ignore(100, '\n');
 }
@@ -344,11 +344,11 @@ void Shell::AddClient()
 void Shell:: DisChange (string surname, double discount2)
 {
         bool ch=false;
-        for (vector<Clients>::iterator i=vClient.begin(); i!=vClient.end(); ++i)
+        for (vector<Client>::iterator i=vClients.begin(); i!=vClients.end(); ++i)
         {
-            if (i->returnCSur()==surname)
+            if (i->getCSur()==surname)
             {
-                i->returnDis(discount2);
+                i->getDis(discount2);
                 ch=true;
                 cout << "The discount has been changed " << endl;
             }
@@ -359,12 +359,12 @@ void Shell:: DisChange (string surname, double discount2)
 
 void Shell:: ShowClients ()
 {
-      if (!vClient.empty())
+      if (!vClients.empty())
       {
-        for (vector<Clients>::iterator i=vClient.begin(); i!=vClient.end(); ++i)
+        for (vector<Client>::iterator i=vClients.begin(); i!=vClients.end(); ++i)
             {
-                cout << "name - " << i->returnCName() << ",  surname - "
-                << i->returnCSur() << ",  discount - " << i->returnDis() << endl;
+                cout << "name - " << i->getCName() << ",  surname - "
+                << i->getCSur() << ",  discount - " << i->getDis() << endl;
             }
         }
       else cout << "The base of clients is empty" << endl;
