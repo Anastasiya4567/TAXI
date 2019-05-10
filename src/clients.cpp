@@ -8,29 +8,29 @@ projekt2 - Korporacja taksowkarska
 
 using namespace std;
 
-Clients::Clients (string s, string n, double d)
+Client::Client (string s, string n, double d)
 {
   this-> cliSur=s;
   this-> cliName=n;
   this-> discount=d;
 }
 
-string Clients:: returnCSur ()
+string Client:: getCSur ()
 {
     return this->cliSur;
 }
 
-string Clients:: returnCName ()
+string Client:: getCName ()
 {
     return this->cliName;
 }
 
-double Clients:: returnDis ()
+double Client:: getDis ()
 {
     return this->discount;
 }
 
-void Clients:: returnDis (double discount2)
+void Client:: getDis (double discount2)
 {
     this->discount=discount2;
 }
