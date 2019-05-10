@@ -2,6 +2,7 @@ CC := g++
 SRCDIR := src
 BUILDDIR := build
 TARGET := bin/Taxi
+VAR :=bin
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
@@ -17,6 +18,6 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	$(RM) -r $(BUILDDIR) $(TARGET)
+	$(RM) -r -f $(BUILDDIR) $(TARGET)
 
 .PHONY: clean
