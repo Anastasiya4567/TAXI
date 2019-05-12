@@ -10,7 +10,7 @@ CFLAGS := -g -Wall -pedantic
 INC := -I include
 
 $(TARGET): $(OBJECTS)
-	@mkdir -p VAR
+	@mkdir -p $(VAR)
 	$(CC) $^ -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
