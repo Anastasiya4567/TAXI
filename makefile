@@ -18,6 +18,6 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	$(RM) -r -f $(BUILDDIR) $(VAR)
+	$(RM) -r $(BUILDDIR) $(VAR)
 
 .PHONY: clean
