@@ -207,7 +207,7 @@ void Shell:: AddAuto ()
 
 void Shell:: DeleteAuto (string name)
 {
-        bool del=false;
+        /*bool del=false;
         for (vector<Auto<short int>>::iterator i=vCars.begin(); i!=vCars.end(); ++i)
         {
             if (i->getName()==name)
@@ -219,6 +219,15 @@ void Shell:: DeleteAuto (string name)
             }
         }
         if (!del)  cout << "No auto with this name is in a base. Check your input data" << endl;
+        cin.ignore(100, '\n');*/
+        vector<Auto<short int>>::iterator tmpCar = find(vCars.begin(), vCars.end(), name);
+        if(tmpCar!=vCars.end())
+        {
+            vCars.erase(tmpCar);
+            cout << "The car with the name " << name << " was deleted" << endl;
+        }
+        else
+            cout << "No auto with this name is in a base. Check your input data" << endl;
         cin.ignore(100, '\n');
 }
 
@@ -274,12 +283,14 @@ void Shell:: AddDriver ()
 
 template <typename K> void Shell:: DeleteDriver (K code)
 {
-    unsigned int length=vDrivers.size();
-    vDrivers.erase(find(vDrivers.begin(), vDrivers.end(), code));
-    if (length==vDrivers.size())
-        cout << "No driver with this code is in a base. Check your input data" << endl;
-    else
+    vector<Driver>::iterator tmpDriver = find(vDrivers.begin(), vDrivers.end(), code);
+    if(tmpDriver!=vDrivers.end())
+    {
+        vDrivers.erase(tmpDriver);
         cout << "The driver with the code " << code << " was deleted" << endl;
+    }
+    else
+        cout << "No driver with this code is in a base. Check your input data" << endl;
     cin.ignore(100, '\n');
 }
 
