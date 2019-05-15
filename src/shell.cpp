@@ -207,7 +207,7 @@ void Shell:: AddAuto ()
 
 void Shell:: DeleteAuto (string name)
 {
-        /*bool del=false;
+        bool del=false;
         for (vector<Auto<short int>>::iterator i=vCars.begin(); i!=vCars.end(); ++i)
         {
             if (i->getName()==name)
@@ -219,13 +219,6 @@ void Shell:: DeleteAuto (string name)
             }
         }
         if (!del)  cout << "No auto with this name is in a base. Check your input data" << endl;
-        cin.ignore(100, '\n');*/
-        unsigned int length=vCars.size();
-        vCars.erase(find(vCars.begin(), vCars.end(), name));
-        if (length==vCars.size())
-            cout << "No car with this name is in a base. Check your input data" << endl;
-        else
-            cout << "The car with the name " << name << " was deleted" << endl;
         cin.ignore(100, '\n');
 }
 
